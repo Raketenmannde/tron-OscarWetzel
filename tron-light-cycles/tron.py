@@ -15,7 +15,6 @@ def draw():
                 matrix[x][y] += 1
                 screen.blit("dot",((x*10)-5,(y*10)-5))
     bike.draw()
-    bike2.draw()
     screen.draw.text("SCORE : "+ str(score), center=(400, 588), owidth=0.5, ocolor=(0,255,255), color=(0,0,255) , fontsize=28)
 
 def update():
@@ -24,21 +23,12 @@ def update():
         bike.angle = dirs[bike.direction]
         bike.x += moves[bike.direction][0]*speed
         bike.y += moves[bike.direction][1]*speed
-        bike2.angle = dirs[bike.direction]
-        bike2.x += moves[bike.direction][0]*speed
-        bike2.y += moves[bike.direction][1]*speed
         score += 10
         if matrix[int(bike.x/10)][int(bike.y/10)] < 15 :
             matrix[int(bike.x/10)][int(bike.y/10)] += 1
         else:
             gamestate = 1
-        if matrix[int(bike2.x/10)][int(bike2.y/10)] < 15 :
-            matrix[int(bike2.x/10)][int(bike2.y/10)] += 1
-        else:
-            gamestate = 1
         if bike.x < 60 or bike.x > 750 or bike.y < 110 or bike.y > 525:
-            gamestate = 1
-        if bike2.x < 60 or bike2.x > 750 or bike2.y < 110 or bike2.y > 525:
             gamestate = 1
     else:
         if gamestate < 18:
@@ -63,15 +53,13 @@ def snapBike():
     bike.y = int(bike.y/10)*10
 
 def init():
-    global bike,matrix,gamestate,score, bike2
-    bike = Actor('bike1', center=(400, 500))
+    global bike,matrix,gamestate,score
+    bike = Actor('bike1_2', center=(400, 500))
     bike.direction = 0
-    bike2 = Actor('bike1_2', center=(300, 500)
     matrix = [[0 for y in range(60)] for x in range(80)]
     gamestate = score = 0
 
 init()
 pgzrun.go()
-
 
 
